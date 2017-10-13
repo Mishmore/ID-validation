@@ -15,13 +15,13 @@ module.exports = {
         filename: '[name].bundle.js',
         chunkFilename: '[name].js'
     },
-    resolve: {
-        // extensions: ['', '.js'],
-        alias: {
-            webworkify: 'webworkify-webpack',
-            'mapbox-gl': path.resolve('./node_modules/mapbox-gl/dist/mapbox-gl.js')
-        }
-    },
+    // resolve: {
+    //     // extensions: ['', '.js'],
+    //     alias: {
+    //         webworkify: 'webworkify-webpack',
+    //         'mapbox-gl': path.resolve('./node_modules/mapbox-gl/dist/mapbox-gl.js')
+    //     }
+    // },
     module: {
         rules: [
             {
