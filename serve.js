@@ -1,21 +1,29 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const reniec = require('./api/reniec');
+var request = require('request');
+var cors = require('cors');
+// const reniec = require('./api/reniec');
 
-const app = express();
-let router = express.Router();
-
+var app = express();
+app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ "extended": true }));
 
-router.get('/', (req, res) => {
-  res.json({ name: 'dni-validation' });
+// let router = express.Router();
+// app.use('/api', reniec(router));
+app.get(/^(?!\/proxy\/).+$/, function (req, res) {
+    res.end('Hello');
 });
 
-app.use('/api', reniec(router));
+app.post('/proxy/:region/:type?', function (req, res) {
 
-app.get('/', function (req, res) {
-    res.send('Hello World!');
-  });
+    let token = 'BQQAy3nslnuejowJaL7bvS6PB0qir1LoXyVZuURD';
+    request.post({
+        url: getEndpoint(req.params, req.query),
+        body: JSON.stringify(req.body)
+    }).pipe(res);
+
+});
 
 app.listen(process.env.PORT || 3000, function () {
     console.log('App listening on port 3000!');

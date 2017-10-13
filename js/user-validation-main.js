@@ -23,17 +23,26 @@ export default class Validation extends React.Component {
         let dni = document.getElementById('dni').value.toString();
 
         this.setState({ input: dni }, () => {
-            tecatus.Reniec.getDni(this.state.input)
-            .then(function (response) {
-                console.log("correct");
-                console.log(response.data);
-            })
-            .catch(function (response) {
-                console.log("Something happened");
-                console.log("Error code: " + response.code);
-                console.log("Response message: " + response.status);
-                console.log(response.data);
-            })
+            postJSON('/proxy/:region/:type?', (tecatusFunction) => {
+                if (err) {
+                        return alert(err.message);
+                } else {
+                    
+                let tecatusFunction = () => {
+                    tecatus.Reniec.getDni(this.state.input)
+                    .then(function (response) {
+                        console.log("correct");
+                        console.log(response.data);
+                    })
+                    .catch(function (response) {
+                        console.log("Something happened");
+                        console.log("Error code: " + response.code);
+                        console.log("Response message: " + response.status);
+                        console.log(response.data);
+                    })
+                }
+            }
+
         })
  
     }
