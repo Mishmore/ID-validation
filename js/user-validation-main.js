@@ -24,16 +24,16 @@ export default class Validation extends React.Component {
 
         this.setState({ input: dni }, () => {
             tecatus.Reniec.getDni(this.state.input)
-                .then(function (response) {
-                    console.log("consulta correcta!");
-                    console.log(response.data);
-                })
-                .catch(function (response) {
-                    console.log("algo ocurrió");
-                    console.log("código de error: " + response.code);
-                    console.log("mensaje de respuesta: " + response.status);
-                    console.log(response.data);
-                })
+            .then(function (response) {
+                console.log("correct");
+                console.log(response.data);
+            })
+            .catch(function (response) {
+                console.log("Something happened");
+                console.log("Error code: " + response.code);
+                console.log("Response message: " + response.status);
+                console.log(response.data);
+            })
         })
  
     }
