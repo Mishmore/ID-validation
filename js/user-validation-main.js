@@ -7,6 +7,7 @@ export default class Validation extends React.Component {
     constructor() {
         super();
 
+        this.login = this.login.bind(this);
         this.state = { 
           dniOwner: null
        }
@@ -21,8 +22,19 @@ export default class Validation extends React.Component {
                 console.error(trouble);
             } else {
                 this.setState({ "dniOwner": result  });
+                this.login(result.apellido_paterno, result.apellido_materno, `${result.apellido_paterno}@gmail.com`);
                 console.table(result);
             }
+        });
+    }
+
+    login(userId, username, email) {
+        const endpoint = `http://localhost:13431/api/new-user/?userid=${userId}&username=${username}&email=${email}`
+
+        getJSON(endpoint, (trouble, result) => {
+           if (trouble) {
+               console.log(trouble);
+           }
         });
     }
 
