@@ -11,11 +11,11 @@ const config = {
   firebase.initializeApp(config);
   const database = firebase.database();
 
-  function writeUserData(userId, name, email) {
+  const writeUserData = (userId, name, email) => {
     database.ref('users/' + userId).set({
       username: name,
       email: email
-    });
+    }).then( () => console.log('Succesfully saved on Firebase') );
   }
 
   const readUser = () => {
