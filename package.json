@@ -75,7 +75,8 @@
     "test": "jest",
     "build": "webpack --config webpack.config.js",
     "dev-server": "webpack-dev-server --inline --hot --port 3040",
-    "sass": "sass --watch sass/main.scss:js/main.css --style compressed"
+    "sass": "sass --watch sass/main.scss:js/main.css --style compressed",
+    "start": "node serve.js"
   },
   "keywords": [
     "taxi",

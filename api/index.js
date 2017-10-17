@@ -10,6 +10,7 @@ const config = {
   const firebase = require('firebase');
   firebase.initializeApp(config);
   const database = firebase.database();
+  const auth = firebase.auth();
 
   const writeUserData = (userId, name, email) => {
     database.ref('users/' + userId).set({
@@ -23,9 +24,20 @@ const config = {
     return database.ref(url).once('value').then(function(snapshot) {
       return snapshot.val();
     });
-};
+  };
+
+  const registerUser = () => {
+    auth.createUserWithEmailAndPassword("email@hotmail.com", "1365659865").catch(function(error) {
+      let errorCode = error.code;
+      let errorMessage = error.message;
+      console.log(errorMessage);
+    });
+  }
+
+  // registerUser();
 
 module.exports = {
     writeUserData : writeUserData,
-    readOnce : readUser
+    readOnce : readUser,
+    registerUser : registerUser
 }

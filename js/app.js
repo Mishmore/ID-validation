@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Validation from './user-validation-main';
+// import Profile from './components/profile';
 
 class Tracker extends React.Component {
     
@@ -10,13 +11,13 @@ class Tracker extends React.Component {
         }
     
         render() {
+            
             return (
-                <div>
-                    <Validation/>
-                </div>
+                <Validation />
             );
         }
     }
+
     
 ReactDOM.render(
 
