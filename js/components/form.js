@@ -56,27 +56,33 @@ export default class Form extends React.Component {
     render() {
 
         return ( 
-            <div className={styles.container}>
-                <div className={styles.logo}></div>
-                <form className={styles.form}>
-                    <fieldset>
-                        <label>DNI: </label>
-                        <input type="number" id="dni" />
-                    </fieldset>
-                    <fieldset>
-                        <label>Username: </label>
-                        <input type="text" id="username" />
-                    </fieldset> 
-                    <fieldset>
-                        <label>Email: </label>
-                        <input type="text" id="email" />
-                    </fieldset>
-                    <fieldset>
-                        <label>Password: </label>
-                        <input type="password" id="password" />
-                    </fieldset>   
-                    <button type="button" onClick={this.validateDNI.bind(this)}>Register</button>
-                </form>
+            <div>
+                <nav>
+                    <div className={styles.logoContainer}>
+                        <div className={styles.logo}></div>
+                    </div>
+                </nav>
+                <div className={styles.container}>
+                    <form className={styles.form}>
+                        <fieldset>
+                            <label>DNI: </label>
+                            <input type="number" id="dni" />
+                        </fieldset>
+                        <fieldset>
+                            <label>Username: </label>
+                            <input type="text" id="username" />
+                        </fieldset> 
+                        <fieldset>
+                            <label>Email: </label>
+                            <input type="text" id="email" />
+                        </fieldset>
+                        <fieldset>
+                            <label>Password: </label>
+                            <input type="password" id="password" />
+                        </fieldset>   
+                        <button type="button" onClick={this.validateDNI.bind(this)}>Register</button>
+                    </form>
+                </div>
             </div>
         );
         
