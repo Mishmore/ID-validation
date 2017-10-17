@@ -56,8 +56,9 @@ export default class Form extends React.Component {
     render() {
 
         return ( 
-            <div>
-                <form>
+            <div className={styles.container}>
+                <div className={styles.logo}></div>
+                <form className={styles.form}>
                     <fieldset>
                         <label>DNI: </label>
                         <input type="number" id="dni" />

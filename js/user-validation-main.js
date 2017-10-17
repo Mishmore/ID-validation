@@ -1,10 +1,8 @@
 import React from 'react';
-import { getJSON } from './utils/get-json';
 import styles from './main.css'
 
 import Profile from './components/profile';
 import Form from './components/form';
-import ToggleButton from './components/toggleButton';
 
 export default class Validation extends React.Component {
 
