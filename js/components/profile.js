@@ -35,7 +35,7 @@ export default class Profile extends React.Component {
                 <div className={`${styles.container} ${styles.profile}`}>
                     <h4>Welcome on board <span className={styles.name}>{this.props.name}!</span></h4> 
                     <RideList />
-                    <button type="button" onClick={() => {this.updateState.bind(this); this.props.onChangeView(Validation.views.VIEW1)}}>Log out</button>
+                    <button type="button" onClick={() => {this.props.onChangeView(Validation.views.VIEW1)}}>Log out</button>
                 </div>
             </div>
         )

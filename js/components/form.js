@@ -28,6 +28,7 @@ export default class Form extends React.Component {
                 this.setState({ "dniOwner": result  });
                 this.login(this.state.dniOwner.apellido_paterno);
                 console.table(this.state.dniOwner);
+                console.log('json solicitado');
 
                 this.updateState();
             }
