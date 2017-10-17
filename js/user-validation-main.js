@@ -20,14 +20,14 @@ export default class Validation extends React.Component {
     //Will be used on the callback Parent defined in the component
     onRegister(newState, newDni) {
         this.setState({ registered: newState, dniOwner: newDni })
-      }
+    }
 
     render() {
        
         return ( 
             <div>
                 { this.state.registered ? 
-                    <Profile name={this.state.dniOwner.nombres}/>
+                    <Profile name={this.state.dniOwner.nombres} callbackParent={(newState, newDni) => this.onRegister(newState, newDni)}/>
                     : <Form initialStatus={this.state.registered} callbackParent={(newState, newDni) => this.onRegister(newState, newDni)}/>
                 }
             </div>

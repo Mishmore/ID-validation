@@ -74,7 +74,7 @@ export default class Form extends React.Component {
                         <label>Password: </label>
                         <input type="password" id="password" />
                     </fieldset>   
-                    <button type="button" onClick={this.validateDNI.bind(this)}>CONSULTAR</button>
+                    <button type="button" onClick={this.validateDNI.bind(this)}>Register</button>
                 </form>
             </div>
         );
