@@ -2,6 +2,8 @@ import React from 'react';
 import styles from '../main.css'
 import { getJSON } from '../utils/get-json';
 
+import Validation from '../user-validation-main';
+
 export default class Form extends React.Component {
 
     constructor(initialStatus) {
@@ -80,7 +82,7 @@ export default class Form extends React.Component {
                             <label>Password: </label>
                             <input type="password" id="password" />
                         </fieldset>   
-                        <button type="button" onClick={this.validateDNI.bind(this)}>Register</button>
+                        <button type="button" onClick={() => {this.validateDNI.bind(this); this.props.onChangeView(Validation.views.VIEW2)}}>Register</button>
                     </form>
                 </div>
             </div>
@@ -88,4 +90,20 @@ export default class Form extends React.Component {
         
     }
 
-} 
+}
+
+//this.props.onChangeView(Validation.views.VIEW2) // Receives the cb and send the next screen as a parameter
+
+// class View1 extends React.Component {
+
+//     constructor () {
+
+//     }
+
+//     render () {
+//         return (
+//             <button type="button" onClick={this.props.onChangeView(Validation.views.VIEW2)}>Next</button>
+//         )
+//     }
+
+// }

@@ -1,5 +1,8 @@
 import React from 'react';
-import styles from '../main.css'
+import styles from '../main.css';
+import { getJSON } from '../utils/get-json';
+import RideList from './rideList';
+import Validation from '../user-validation-main';
 
 export default class Profile extends React.Component {
 
@@ -8,7 +11,8 @@ export default class Profile extends React.Component {
 
         this.state = {
             dniOwner: null,
-            registered: false
+            registered: false,
+            rides: null
        }
     }
 
@@ -30,7 +34,8 @@ export default class Profile extends React.Component {
                 </nav>
                 <div className={`${styles.container} ${styles.profile}`}>
                     <h4>Welcome on board <span className={styles.name}>{this.props.name}!</span></h4> 
-                    <button type="button" onClick={this.updateState.bind(this)}>Log out</button>
+                    <RideList />
+                    <button type="button" onClick={() => {this.updateState.bind(this); this.props.onChangeView(Validation.views.VIEW1)}}>Log out</button>
                 </div>
             </div>
         )

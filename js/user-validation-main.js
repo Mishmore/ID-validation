@@ -6,31 +6,75 @@ import Form from './components/form';
 
 export default class Validation extends React.Component {
 
+    //Object that stores views
+    static views = {
+        INITIAL_VIEW: 0,
+        VIEW1: 1,
+        VIEW2: 2,
+        VIEW3: 3
+    };
+
     constructor() {
         super();
 
         this.state = {
             dniOwner: null,
-            registered: false
+            registered: false,
+            currentView: Validation.views.VIEW1 //Assign currentView for the future updates
        }
+    }
+
+    //Callback to change the current view
+    changeView (view) {
+        this.setState({ currentView: view });
     }
 
     //Will be used on the callback Parent defined in the component
     onRegister(newState, newDni) {
         this.setState({ registered: newState, dniOwner: newDni })
+
+        //this.changeView(Validation.views.VIEW1);
     }
 
     render() {
-       
-        return ( 
-            <div>
-                { this.state.registered ? 
-                    <Profile name={this.state.dniOwner.nombres} callbackParent={(newState, newDni) => this.onRegister(newState, newDni)}/>
-                    : <Form initialStatus={this.state.registered} callbackParent={(newState, newDni) => this.onRegister(newState, newDni)}/>
-                }
-            </div>
-        );
-        
+
+        let view = null;
+
+        switch (this.state.currentView) {
+
+            case Validation.views.VIEW1:
+                view = <Form onChangeView={view => this.changeView(view)} /> //Assigning the cb as a property for the use of components
+                break;
+
+            case Validation.views.VIEW2:
+                view = <Profile onChangeView={view => this.changeView(view)} />
+                break;
+
+            default:
+                view = <Form onChangeView={view => this.changeView(view)} />    
+                break;
+
+        }
+
+        return (
+            view
+        );        
     }
     
 }
+
+//Example of component using the static states
+
+// class View1 extends React.Component {
+
+//     constructor () {
+
+//     }
+
+//     render () {
+//         return (
+//             <button type="button" onClick={this.props.onChangeView(Validation.views.VIEW2)}>Next</button>
+//         )
+//     }
+
+// }
