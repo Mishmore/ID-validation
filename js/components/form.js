@@ -11,6 +11,7 @@ export default class Form extends React.Component {
 
         this.login = this.login.bind(this);
         this.updateState = this.updateState.bind(this);
+
         this.state = { 
           dniOwner: null,
           registered: initialStatus // initialStatus as a parameter to pass to parent
@@ -18,6 +19,7 @@ export default class Form extends React.Component {
     }
     
     validateDNI() {
+        console.log('validate function being called')
         const dni = document.getElementById('dni').value.toString();
         const endpoint = `http://localhost:13431/dni/?v=${dni}`;
 
@@ -30,16 +32,18 @@ export default class Form extends React.Component {
                 console.table(this.state.dniOwner);
                 console.log('json solicitado');
 
-                this.updateState();
+                //main Callback
+                this.props.onChangeView(Validation.views.VIEW2, true, this.state.dniOwner);
             }
         });
     }
     
     updateState() {
-        const newState = true;
-        const newDni = this.state.dniOwner;
-        this.setState({ registered: newState, dniOwner: newDni }); // changing the local state
-        this.props.callbackParent(newState, newDni); // callback to send the state to parent
+        // const newState = true;
+        // const newDni = this.state.dniOwner;
+        // this.setState({ registered: newState, dniOwner: newDni }); // changing the local state
+        // this.props.callbackParent(newState, newDni); // callback to send the state to parent
+        this.props.onChangeView(Validation.views.VIEW2, true, this.state.dniOwner);
     }
 
     login(userId) {
@@ -83,7 +87,7 @@ export default class Form extends React.Component {
                             <label>Password: </label>
                             <input type="password" id="password" />
                         </fieldset>   
-                        <button type="button" onClick={() => {this.validateDNI.bind(this); this.props.onChangeView(Validation.views.VIEW2)}}>Register</button>
+                        <button type="button" onClick={this.validateDNI.bind(this)}>Register</button>
                     </form>
                 </div>
             </div>
@@ -92,19 +96,3 @@ export default class Form extends React.Component {
     }
 
 }
-
-//this.props.onChangeView(Validation.views.VIEW2) // Receives the cb and send the next screen as a parameter
-
-// class View1 extends React.Component {
-
-//     constructor () {
-
-//     }
-
-//     render () {
-//         return (
-//             <button type="button" onClick={this.props.onChangeView(Validation.views.VIEW2)}>Next</button>
-//         )
-//     }
-
-// }
