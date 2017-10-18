@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../main.css'
 import { getJSON } from '../utils/get-json';
+
 import Ride from './ride';
 
 export default class RideList extends React.Component {
@@ -9,23 +10,25 @@ export default class RideList extends React.Component {
         super();
 
         this.state = {
-            rides: null
+            rides: null,
+            item: null
        }
     }
 
-    // componentWillMount() {
-    //     console.log('asking json');
+    componentWillMount() {
 
-    //     getJSON('../data.json', (err, json) => {
-    //         (err) ? alert(err.message) : this.setState({ rides: json.items });
-    //         console.log(json.items);
-    //     })
-    // }
+        getJSON('../data.json', (err, json) => {
+            (err) ? alert(err.message) : this.setState({ rides: json.items });
+        })
+    }
 
     render() {
         return(
             <ul>
-                {/* {this.state.rides.map(elm => <Ride origin={elm.src_loc} destination={elm.dst_loc} total="S/ 50"/>)} */}
+                { this.state.rides ?
+                    this.state.rides.map(elm => 
+                    <Ride origin={elm.src_loc.address.address} destination={elm.dst_loc.address.address} total="S/ 50" />) 
+                    : <li>"Cargando..."</li> }
             </ul>
         )
     }

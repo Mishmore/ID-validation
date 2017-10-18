@@ -10,7 +10,6 @@ export default class Form extends React.Component {
         super();
 
         this.login = this.login.bind(this);
-        this.updateState = this.updateState.bind(this);
 
         this.state = { 
           dniOwner: null,
@@ -19,7 +18,6 @@ export default class Form extends React.Component {
     }
     
     validateDNI() {
-        console.log('validate function being called')
         const dni = document.getElementById('dni').value.toString();
         const endpoint = `http://localhost:13431/dni/?v=${dni}`;
 
@@ -30,23 +28,15 @@ export default class Form extends React.Component {
                 this.setState({ "dniOwner": result  }, () => { // Set status is async!
 
                     console.table(this.state.dniOwner);
-                    console.log('json guardado');
-                    this.props.onChangeView(Validation.views.VIEW2, true, this.state.dniOwner); //main Callback
                     this.login(this.state.dniOwner.apellido_paterno);
+
+                    this.props.onChangeView(Validation.views.VIEW2, true, this.state.dniOwner); //main Callback
 
                 });
 
                 
             }
         });
-    }
-    
-    updateState() {
-        // const newState = true;
-        // const newDni = this.state.dniOwner;
-        // this.setState({ registered: newState, dniOwner: newDni }); // changing the local state
-        // this.props.callbackParent(newState, newDni); // callback to send the state to parent
-        this.props.onChangeView(Validation.views.VIEW2, true, this.state.dniOwner);
     }
 
     login(userId) {

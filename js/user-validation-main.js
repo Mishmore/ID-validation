@@ -50,7 +50,7 @@ export default class Validation extends React.Component {
         switch (this.state.currentView) {
 
             case Validation.views.VIEW1:
-                view = <Form onChangeView={(view, newState, newDni) => this.mainCallback(view, newState, newDni)} /> //Assigning the cb as a property for the use of components
+                view = <Form onChangeView={(view, newState, newDni) => this.mainCallback(view, newState, newDni)} initialStatus={this.state.registered}/> // Assigning the cb as a property for the use of components
                 break;
 
             case Validation.views.VIEW2:
@@ -58,7 +58,7 @@ export default class Validation extends React.Component {
                 break;
 
             default:
-                view = <Form onChangeView={(view, newState, newDni) => this.mainCallback(view, newState, newDni)}/>    
+                view = <Form onChangeView={(view, newState, newDni) => this.mainCallback(view, newState, newDni)} initialStatus={this.state.registered}/> // Initial status as a prop also!   
                 break;
 
         }
