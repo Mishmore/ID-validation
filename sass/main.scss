@@ -120,8 +120,8 @@ nav {
         cursor: pointer;
         
         &:hover {
-            border: 1px solid #9b9b9b;
-            color: #9b9b9b;
+            background-color: $navy;
+            color: #ffffff;
         }
     }
 
@@ -133,4 +133,34 @@ nav {
         }
     }
     
+}
+
+.rideList {
+    list-style: none;
+    width: 500px;
+    margin: 30px auto;
+
+    li {
+        border: 1px solid $green;
+        border-radius: 8px;
+        padding: 13px 15px;
+        margin: 10px;
+        font-size: .8rem;
+        transition: .3s;
+
+        &:hover {
+            border-color: $navy;
+            cursor: pointer; 
+            transform: translateX(8px);
+        }
+    }
+}
+
+.loading {
+    background-image: url(https://cdn.dribbble.com/users/133876/screenshots/1335747/sun.gif);
+    width: 125px;
+    height: 125px;
+    background-position: center center;
+    background-repeat: none;
+    margin: 20px auto;
 }
