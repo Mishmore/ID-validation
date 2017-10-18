@@ -31,12 +31,12 @@ export default class Form extends React.Component {
 
                     console.table(this.state.dniOwner);
                     console.log('json guardado');
-                    this.props.onChangeView(Validation.views.VIEW2, true, this.state.dniOwner);
+                    this.props.onChangeView(Validation.views.VIEW2, true, this.state.dniOwner); //main Callback
                     this.login(this.state.dniOwner.apellido_paterno);
 
                 });
 
-                //main Callback
+                
             }
         });
     }

@@ -43,10 +43,6 @@ export default class Validation extends React.Component {
         // this.onRegister(newState, newDni);
     }
 
-    componentDidUpdate() {
-        console.log(this.state.dniOwner.nombres) // Know when state is updated
-    }
-
     render() {
 
         let view = null;
