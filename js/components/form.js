@@ -27,13 +27,16 @@ export default class Form extends React.Component {
             if (trouble) {
                 console.error(trouble);
             } else {
-                this.setState({ "dniOwner": result  });
-                this.login(this.state.dniOwner.apellido_paterno);
-                console.table(this.state.dniOwner);
-                console.log('json solicitado');
+                this.setState({ "dniOwner": result  }, () => { // Set status is async!
+
+                    console.table(this.state.dniOwner);
+                    console.log('json guardado');
+                    this.props.onChangeView(Validation.views.VIEW2, true, this.state.dniOwner);
+                    this.login(this.state.dniOwner.apellido_paterno);
+
+                });
 
                 //main Callback
-                this.props.onChangeView(Validation.views.VIEW2, true, this.state.dniOwner);
             }
         });
     }

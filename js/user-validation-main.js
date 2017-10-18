@@ -16,6 +16,8 @@ export default class Validation extends React.Component {
 
     constructor() {
         super();
+        this.changeView = this.changeView.bind(this);
+        this.onRegister = this.onRegister.bind(this);
 
         this.state = {
             dniOwner: null,
@@ -32,13 +34,17 @@ export default class Validation extends React.Component {
     //Will be used on the callback Parent defined in the component
     onRegister(newState, newDni) {
         this.setState({ registered: newState, dniOwner: newDni })
-
-        //this.changeView(Validation.views.VIEW1);
     }
 
     mainCallback(view, newState, newDni) {
         this.setState({ currentView: view });
         this.setState({ registered: newState, dniOwner: newDni })
+        // this.changeView(view);
+        // this.onRegister(newState, newDni);
+    }
+
+    componentDidUpdate() {
+        console.log(this.state.dniOwner.nombres) // Know when state is updated
     }
 
     render() {
@@ -52,7 +58,7 @@ export default class Validation extends React.Component {
                 break;
 
             case Validation.views.VIEW2:
-                view = <Profile onChangeView={(view, newState, newDni) => this.mainCallback(view, newState, newDni)} name="Paula"/>
+                view = <Profile name={this.state.dniOwner.nombres} onChangeView={(view, newState, newDni) => this.mainCallback(view, newState, newDni)} />
                 break;
 
             default:
@@ -67,19 +73,3 @@ export default class Validation extends React.Component {
     }
     
 }
-
-//Example of component using the static states
-
-// class View1 extends React.Component {
-
-//     constructor () {
-
-//     }
-
-//     render () {
-//         return (
-//             <button type="button" onClick={this.props.onChangeView(Validation.views.VIEW2)}>Next</button>
-//         )
-//     }
-
-// }
