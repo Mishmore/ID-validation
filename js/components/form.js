@@ -57,8 +57,8 @@ export default class Form extends React.Component {
     render() {
 
         return ( 
-            <div>
-                <Navbar onChangeView={(view, newState, newDni) => this.props.onChangeView(view, newState, newDni)}/>                
+            <div className={styles.register}>
+                <Navbar onChangeView={(view, newState, newDni) => this.props.onChangeView(view, newState, newDni)} currentView={this.props.currentView}/>                
                 <div className={styles.container}>
                     <form className={styles.form}>
                         <fieldset>

@@ -53,14 +53,22 @@ nav {
     }
 }
 
+.register {
+    @extend .init;
+    background: linear-gradient(180deg, #413f60 55%, #ffffff 55%);
+}
+
 .form {
-    width: 350px;
+    width: 500px;
     margin: 0 auto;
-    padding-top: 130px;
+    padding: 80px;
+    background-color: $navy;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);    
 
     fieldset {
         border: none;
-        margin: 20px 0;
+        margin-bottom: 40px;
     }
     
     label {
@@ -68,19 +76,23 @@ nav {
         font-size: .7rem;
         margin: 0 auto;
         margin-bottom: 5px;
-        text-transform: uppercase;    
+        text-transform: uppercase;
+        letter-spacing: 1px;        
     }
     
     input {
         width: 100%;
-        font-size: .8rem;
+        font-size: .9rem;
         margin: 0 auto;
         display: block;    
         border: none;
-        border-bottom: 1px solid $navy; 
+        border-bottom: 1px solid #cccccc; 
         outline: none;
         transition: .3s;
         padding: 5px;
+        background: none;
+        color: #cccccc;
+        text-align: center;
         
         &:focus {
             border-bottom: 1px solid desaturate($green, 10%); 
@@ -96,7 +108,7 @@ nav {
 
     .signin {
         position: static;
-        margin: 60px auto;
+        margin: 60px auto 13px;
         display: block;
         transform: none;
     }
@@ -146,22 +158,17 @@ nav {
     cursor: pointer;
     right: 0;
     top: 50%;
-    transform: translate(-130% ,-50%);
+    transform: translateY(-50%);
     color: $navy;
     position: absolute;
     border: 1px solid $green;
     width: 90px;
     font-weight: 600;
-    
-    &:hover {
-        border: 1px solid desaturate($green, 15%);
-        background-color: desaturate($green, 15%);
-    }
 }
 
 .profile {
     padding-top: 130px;
-
+    padding-bottom: 40px;
 
     h4 {
         color: $navy;
@@ -229,14 +236,10 @@ nav {
     font-size: 1.3rem;
     font-weight: 600;
     text-decoration: none;
-    transition: .3s;
-    padding: 3px 9px;
-    border-radius: 50%;    
+    transition: .3s;  
 
     &:hover {
-        color: $orange;
-        background-color: $navy;
-        box-shadow: 0 5px 18px 0 rgba(0,0,0,0.19);
+        color: #ffffff;
     }
 }
 

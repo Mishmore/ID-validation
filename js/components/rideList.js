@@ -33,7 +33,7 @@ export default class RideList extends React.Component {
                 (err) ? alert(err.message) : this.setState({ rides2: json.items });
                 this.setState({ loading: false });
             }) 
-        }, 800)
+        }, 500)
         : false ;    
     }
 
