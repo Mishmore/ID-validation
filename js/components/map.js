@@ -356,7 +356,7 @@ export default class Map extends React.Component {
                 scale: 0.07,
                 strokeColor: 'transparent',
                 strokeWeight: 0,
-                offset: 0
+                anchor: new google.maps.Point(250, 500)
             },
             end : {
                 path: "M242.606,60.651c50.166,0,90.979,40.812,90.979,90.978c0,50.171-40.813,90.978-90.979,90.978   c-50.167,0-90.978-40.806-90.978-90.978C151.628,101.462,192.44,60.651,242.606,60.651 M242.606,0   C158.855,0,90.978,67.878,90.978,151.628c0,83.753,67.878,333.584,151.629,333.584s151.629-249.831,151.629-333.584   C394.235,67.878,326.357,0,242.606,0L242.606,0z",
@@ -365,7 +365,7 @@ export default class Map extends React.Component {
                 scale: 0.07,
                 strokeColor: 'transparent',
                 strokeWeight: 0,
-                offset: '50%'
+                anchor: new google.maps.Point(250, 480)
             }
         }
         
@@ -397,6 +397,7 @@ export default class Map extends React.Component {
                 this.createMarker(path[0], map, icon.start).addListener('click', function() {
                     startInfo.open(map, this);
                     console.log(this.position.lat());
+                    console.log(path[0].lat());
                 });
                 
                 this.createMarker(path.slice(-1)[0], map, icon.end).addListener('click', function() {
