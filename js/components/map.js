@@ -1,25 +1,19 @@
 import React from 'react';
 import styles from '../main.css'
 
+import Legend from './legend'
+
 export default class Map extends React.Component {
 
     constructor(coords, initialClick) {
-
         super();
-        this.createMarker = this.createMarker.bind(this);
-        this.showMarkers = this.showMarkers.bind(this);
-        this.showTrace = this.showTrace.bind(this);
-        this.showInfoWindow = this.showInfoWindow.bind(this);
-        
+               
         this.state = { 
             all_coords: coords
          }
     }
     
     componentDidMount() {
-        console.log(this.state.all_coords.coords);
-
-        //Add personalized style to map
         let styledMapType = new google.maps.StyledMapType(
             [
                 {
@@ -343,54 +337,17 @@ export default class Map extends React.Component {
                     lng: this.state.all_coords.coords.src_loc.point.lon
             },
             zoom: 14,
-            disableDefaultUI: true //disable default controls
+            disableDefaultUI: true
         });
 
         map.mapTypes.set('styled_map', styledMapType);
         map.setMapTypeId('styled_map');
         
-        //this.showMarkers(map);
-
+        this.showTrace(map);
     };
-
-    close() {
-        this.props.onCloseClick(false);
-    }
-
-    createMarker(position, map, icon) {
-
-        return (
-            new google.maps.Marker({
-                position: position,
-                map: map,
-                icon: icon                      
-            })
-        )
-
-    }
-
-    showInfoWindow(address, passFname, passLname, total) {
-
-        return  new google.maps.InfoWindow({
-                content:    `<div id="address">
-                                <span class="infowindow-title">Address: </span>
-                                <span>${address}</span>
-                            </div>
-                            <div id="passenger">
-                                <span class="infowindow-title">Passenger: </span>
-                                <span>${passFname} ${passLname}</span>
-                            </div>
-                            <div id="total">
-                                <span class="infowindow-title">Total: </span>s
-                                <span>${total}</span>
-                            </div>`
-                });
-
-    }
     
-    showMarkers(map) {
-
-        //Create personalized icon symbols
+    showTrace(map) {
+        let elm = this.state.all_coords.coords;
         const icon = {
             start : {
                 path: "M242.606,60.651c50.166,0,90.979,40.812,90.979,90.978c0,50.171-40.813,90.978-90.979,90.978   c-50.167,0-90.978-40.806-90.978-90.978C151.628,101.462,192.44,60.651,242.606,60.651 M242.606,0   C158.855,0,90.978,67.878,90.978,151.628c0,83.753,67.878,333.584,151.629,333.584s151.629-249.831,151.629-333.584   C394.235,67.878,326.357,0,242.606,0L242.606,0z",
@@ -398,7 +355,8 @@ export default class Map extends React.Component {
                 fillOpacity: 1,
                 scale: 0.07,
                 strokeColor: 'transparent',
-                strokeWeight: 0
+                strokeWeight: 0,
+                offset: 0
             },
             end : {
                 path: "M242.606,60.651c50.166,0,90.979,40.812,90.979,90.978c0,50.171-40.813,90.978-90.979,90.978   c-50.167,0-90.978-40.806-90.978-90.978C151.628,101.462,192.44,60.651,242.606,60.651 M242.606,0   C158.855,0,90.978,67.878,90.978,151.628c0,83.753,67.878,333.584,151.629,333.584s151.629-249.831,151.629-333.584   C394.235,67.878,326.357,0,242.606,0L242.606,0z",
@@ -406,70 +364,86 @@ export default class Map extends React.Component {
                 fillOpacity: 1,
                 scale: 0.07,
                 strokeColor: 'transparent',
-                strokeWeight: 0
+                strokeWeight: 0,
+                offset: '50%'
             }
         }
-
-        // this.state.datos.map(elm => {
-        //     let src = this.createMarker( { lat: elm.src_loc.point.lat, lng: elm.src_loc.point.lon }, map, icon.start );
-        //     let infowindowSrc = this.showInfoWindow(elm.src_loc.address.address, elm.passenger.fname, elm.passenger.lname, elm.receipt.total.amount);
         
-        //     src.addListener('click', () => {
-        //       infowindowSrc.open(map, src);
-        //     });
-
-        //     let dst = this.createMarker( { lat: elm.dst_loc.point.lat, lng: elm.dst_loc.point.lon }, map, icon.end );
-        //     let infowindowDst = this.showInfoWindow(elm.dst_loc.address.address, elm.passenger.fname, elm.passenger.lname, elm.receipt.total.amount);
-                      
-        //     dst.addListener('click', () => {
-        //         infowindowDst.open(map, dst);
-        //       });
-            
-        //     this.showTrace(map, src, dst, icon, this.showInfoWindow, this.createMarker, elm);
-        // });
-
-    }
-    
-    showTrace(map, start, end, icon, showInfoWindow, createMarker, elm) {
-
+        let startInfo = this.showInfoWindow(elm.src_loc.address.address, elm.passenger.fname, elm.passenger.lname, elm.receipt.total.amount);
+        let endInfo = this.showInfoWindow(elm.dst_loc.address.address, elm.passenger.fname, elm.passenger.lname, elm.receipt.total.amount);
+        
         let directionsService = new google.maps.DirectionsService();
-        let directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: '#ee5a23', strokeOpacity: '0.7'}, suppressMarkers: true }); //style track and hide default markers
+        let directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: '#ee5a23', strokeOpacity: '0.7'}, suppressMarkers: true });
         directionsDisplay.setMap(map);
 
         let request = {
-            origin: start.position,
-            destination: end.position,
+            origin: {lat: this.state.all_coords.coords.src_loc.point.lat, lng: this.state.all_coords.coords.src_loc.point.lon},
+            destination: {lat: this.state.all_coords.coords.dst_loc.point.lat, lng: this.state.all_coords.coords.dst_loc.point.lon},
             travelMode: 'DRIVING'
         };
-        
-        let startInfo = showInfoWindow(elm.src_loc.address.address, elm.passenger.fname, elm.passenger.lname, elm.receipt.total.amount);
-        let endInfo = showInfoWindow(elm.dst_loc.address.address, elm.passenger.fname, elm.passenger.lname, elm.receipt.total.amount);
-
-        directionsService.route(request, function(result, status) {
+       
+        directionsService.route(request, (result, status) => {
 
             if (status == 'OK') {
                 directionsDisplay.setDirections(result);
+                var path = result.routes[0].overview_path;
 
-                let startTrack = createMarker(start.position, map, icon.start);
-                startTrack.addListener('click', () => {
-                    startInfo.open(map, startTrack);
+                // console.debug(path[0].lat(), request.origin.lat);
+                // console.debug(path.slice(-1)[0].lat(), request.destination.lat);
+
+                // console.debug(path[0].lng(), request.origin.lng);
+                // console.debug(path.slice(-1)[0].lng(), request.destination.lng);
+
+                this.createMarker(path[0], map, icon.start).addListener('click', function() {
+                    startInfo.open(map, this);
+                    console.log(this.position.lat());
                 });
                 
-                const endTrack = createMarker(end.position, map, icon.end);
-                endTrack.addListener('click', () => {
-                    startInfo.open(map, endTrack    );
+                this.createMarker(path.slice(-1)[0], map, icon.end).addListener('click', function() {
+                    startInfo.open(map, this);
                 });
-             }
-        });
 
+             } else { 'sth happened' }
+        });
+    }
+
+    createMarker(position, map, icon) {
+        return (
+            new google.maps.Marker({
+                position: position,
+                map: map,
+                icon: icon                      
+            })
+        )
+    }
+
+    showInfoWindow(address, passFname, passLname, total) {
+        return  new google.maps.InfoWindow({
+                content:    `<div id="address">
+                                <span class="bold">Address: </span>
+                                <span>${address}</span>
+                            </div>
+                            <div id="passenger">
+                                <span class="bold">Passenger: </span>
+                                <span>${passFname} ${passLname}</span>
+                            </div>
+                            <div id="total">
+                                <span class="bold">Total: </span>S/ 
+                                <span> ${total}</span>
+                            </div>`
+                });
     }
 
     render() {
 
         return ( 
-            <div className={styles.mapContainer}>
-                <a href="#" className={styles.close} onClick={() => this.props.parentState(false)}>✕</a>
-                <div ref = "map" className={styles.map}> Recharge your browser! </div> 
+            <div>
+                <div className={styles.mapContainer}>
+                    <a href="#" className={styles.close} onClick={(e) => this.props.parentState(false, e)}>✕</a>
+                    <div ref = "map" className={styles.map}> Recharge your browser! </div> 
+                <Legend />
+                </div>
+                <div className={styles.overlay} onClick={(e) => this.props.parentState(false, e)}></div>
             </div>
         );
         

@@ -3,6 +3,7 @@ import styles from '../main.css'
 import { getJSON } from '../utils/get-json';
 
 import Validation from '../user-validation-main';
+import Navbar  from './navbar';
 
 export default class Form extends React.Component {
 
@@ -57,11 +58,7 @@ export default class Form extends React.Component {
 
         return ( 
             <div>
-                <nav>
-                    <div className={styles.logoContainer}>
-                        <div className={styles.logo}></div>
-                    </div>
-                </nav>
+                <Navbar onChangeView={(view, newState, newDni) => this.props.onChangeView(view, newState, newDni)}/>                
                 <div className={styles.container}>
                     <form className={styles.form}>
                         <fieldset>
@@ -80,7 +77,7 @@ export default class Form extends React.Component {
                             <label>Password: </label>
                             <input type="password" id="password" />
                         </fieldset>   
-                        <button type="button" onClick={this.validateDNI.bind(this)}>Register</button>
+                        <button type="button" onClick={this.validateDNI.bind(this)} className={styles.signin}>Sign in</button>
                     </form>
                 </div>
             </div>

@@ -3,6 +3,7 @@ import styles from './main.css'
 
 import Profile from './components/profile';
 import Form from './components/form';
+import Init from './components/init'
 
 export default class Validation extends React.Component {
 
@@ -16,31 +17,17 @@ export default class Validation extends React.Component {
 
     constructor() {
         super();
-        this.changeView = this.changeView.bind(this);
-        this.onRegister = this.onRegister.bind(this);
 
         this.state = {
             dniOwner: null,
             registered: false,
-            currentView: Validation.views.VIEW1 //Assign currentView for the future updates
+            currentView: Validation.views.INITIAL_VIEW //Assign currentView for the future updates
        }
-    }
-
-    //Callback to change the current view
-    changeView (view) {
-        this.setState({ currentView: view });
-    }
-
-    //Will be used on the callback Parent defined in the component
-    onRegister(newState, newDni) {
-        this.setState({ registered: newState, dniOwner: newDni })
     }
 
     mainCallback(view, newState, newDni) {
         this.setState({ currentView: view });
         this.setState({ registered: newState, dniOwner: newDni })
-        // this.changeView(view);
-        // this.onRegister(newState, newDni);
     }
 
     render() {
@@ -50,15 +37,15 @@ export default class Validation extends React.Component {
         switch (this.state.currentView) {
 
             case Validation.views.VIEW1:
-                view = <Form onChangeView={(view, newState, newDni) => this.mainCallback(view, newState, newDni)} initialStatus={this.state.registered}/> // Assigning the cb as a property for the use of components
+                view = <Form onChangeView={(view, newState, newDni) => this.mainCallback(view, newState, newDni)} initialStatus={this.state.registered} currentView={this.state.currentView}/> // Assigning the cb as a property for the use of components
                 break;
 
             case Validation.views.VIEW2:
-                view = <Profile name={this.state.dniOwner.nombres} onChangeView={(view, newState, newDni) => this.mainCallback(view, newState, newDni)} />
+                view = <Profile name={this.state.dniOwner.nombres} onChangeView={(view, newState, newDni) => this.mainCallback(view, newState, newDni)} currentView={this.state.currentView}/>
                 break;
 
             default:
-                view = <Form onChangeView={(view, newState, newDni) => this.mainCallback(view, newState, newDni)} initialStatus={this.state.registered}/> // Initial status as a prop also!   
+                view = <Init onChangeView={(view, newState, newDni) => this.mainCallback(view, newState, newDni)} currentView={this.state.currentView}/> // Initial status as a prop also!   
                 break;
 
         }

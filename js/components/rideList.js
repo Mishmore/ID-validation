@@ -9,9 +9,6 @@ export default class RideList extends React.Component {
     constructor() {
         super();
 
-        this.infiniteScroll = this.infiniteScroll.bind(this); 
-        //this.openMap = this.openMap.bind(this)
-
         this.state = {
             rides: null,
             rides2: null,
@@ -36,7 +33,7 @@ export default class RideList extends React.Component {
                 (err) ? alert(err.message) : this.setState({ rides2: json.items });
                 this.setState({ loading: false });
             }) 
-        }, 1000)
+        }, 800)
         : false ;    
     }
 
@@ -57,12 +54,12 @@ export default class RideList extends React.Component {
             <ul className={styles.rideList}>
                 { this.state.rides ?
                     this.state.rides.map(elm => 
-                    <Ride origin={elm.src_loc.address.address} destination={elm.dst_loc.address.address} total="S/ 50" rideinfo={elm}/>) 
+                    <Ride origin={elm.src_loc.address.address} destination={elm.dst_loc.address.address} total={`S/ ${elm.receipt.total.amount}`} rideinfo={elm}/>) 
                     : <div className={styles.loading}></div>
                 }
                 { this.state.rides2 ?
                     this.state.rides2.map(elm => 
-                    <Ride origin={elm.src_loc.address.address} destination={elm.dst_loc.address.address} total="S/ 50" rideinfo={elm}/>) 
+                    <Ride origin={elm.src_loc.address.address} destination={elm.dst_loc.address.address} total={`S/ ${elm.receipt.total.amount}`} rideinfo={elm}/>) 
                     : <div className={styles.loading}></div>
                 }
             </ul>

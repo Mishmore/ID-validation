@@ -15,24 +15,31 @@ export default class Ride extends React.Component {
          }
     }
 
-    openMap() {
+    openMap() {        
         this.setState({ isClicked: true });
+        document.getElementsByTagName('body')[0].style.overflow = 'hidden'; 
     }
 
-    onCloseClick(newClick) {
-        this.setState({ isClicked: newClick })
+    onCloseClick(newClick, e) {
+        this.setState({ isClicked: newClick });
+        document.getElementsByTagName('body')[0].style.overflow = 'auto';    
     }
 
     render() {
         return(
             <div>
-                <li className={styles.ride} onClick={this.props.openMap}>
-                    <p>Origin: {this.props.origin}</p>
-                    <p>Destination: {this.props.destination}</p>
-                    <p>Total: {this.props.total}</p>
-                    <a href="#" onClick={this.openMap.bind(this)}>Open map</a>
+                <li className={styles.ride} onClick={this.openMap.bind(this)}>
+                    <p>
+                        <span className={styles.bold}>Origin: </span><span>{this.props.origin}</span>
+                        </p>
+                    <p>
+                        <span className={styles.bold}>Destination: </span><span>{this.props.destination}</span>
+                        </p>
+                    <p>
+                        <span className={styles.bold}>Total: </span><span>{this.props.total}</span>
+                        </p>
                 </li>
-                    { this.state.isClicked && <Map coords={this.state.data.rideinfo} parentState={(newClick) => this.onCloseClick(newClick)} initialClick={this.state.isClicked}/> }
+                    { this.state.isClicked && <Map coords={this.state.data.rideinfo} parentState={(newClick, e) => this.onCloseClick(newClick, e)} initialClick={this.state.isClicked}/> }
             </div>
         )
     }
