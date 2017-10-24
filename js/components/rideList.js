@@ -24,6 +24,7 @@ export default class RideList extends React.Component {
 
     componentDidMount() {
         window.addEventListener('scroll', () => this.infiniteScroll());
+        console.log('mounted');
     }
     
     componentWillUpdate() {

@@ -16,7 +16,7 @@ app.get('/dni', function (req, res) {
         "url": 'https://tecactus.com/api/reniec/dni',
         "headers": {
             "Content-Type": "application/json",
-            "Authorization": "Bearer lY1GflO69hv9NLuo7uzc4Jq6ZsVTfekDvP06pMlj"
+            "Authorization": "Bearer 51a1kyARkvmsI17mAAP5WzS1UousH6KFta1ktjXE"
         },
         "json": true,
         "body": {

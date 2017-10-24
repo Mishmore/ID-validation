@@ -336,7 +336,7 @@ export default class Map extends React.Component {
                     lat: this.state.all_coords.coords.src_loc.point.lat,
                     lng: this.state.all_coords.coords.src_loc.point.lon
             },
-            zoom: 14,
+            zoom: 12,
             disableDefaultUI: true
         });
 
@@ -388,16 +388,8 @@ export default class Map extends React.Component {
                 directionsDisplay.setDirections(result);
                 var path = result.routes[0].overview_path;
 
-                // console.debug(path[0].lat(), request.origin.lat);
-                // console.debug(path.slice(-1)[0].lat(), request.destination.lat);
-
-                // console.debug(path[0].lng(), request.origin.lng);
-                // console.debug(path.slice(-1)[0].lng(), request.destination.lng);
-
                 this.createMarker(path[0], map, icon.start).addListener('click', function() {
                     startInfo.open(map, this);
-                    console.log(this.position.lat());
-                    console.log(path[0].lat());
                 });
                 
                 this.createMarker(path.slice(-1)[0], map, icon.end).addListener('click', function() {
