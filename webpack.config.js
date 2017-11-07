@@ -1,8 +1,8 @@
-let path = require('path');
-let webpack = require('webpack');
-// let transform = require("transform-loader");
+let path = require('path')
+let webpack = require('webpack')
+    // let transform = require("transform-loader")
 
-module.exports = {
+let config = {
     target: 'web',
     devtool: '#inline-source-map', // cheap-module-source-map
     cache: true,
@@ -23,8 +23,7 @@ module.exports = {
     //     }
     // },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.jsx?$/,
                 use: [{
                     loader: 'babel-loader',
@@ -85,12 +84,22 @@ module.exports = {
             }
         }),
         new webpack.optimize.UglifyJsPlugin({
-                sourceMap: true,
-                compress: {
-                    warnings: false,
-                    comparisons: false,  // don't optimize comparisons
-                },
+            sourceMap: true,
+            compress: {
+                warnings: false,
+                comparisons: false, // don't optimize comparisons
             }
-        )
+        })
     ]
-};
+}
+
+if (process.env.NODE_ENV === 'production') {
+    config.devtool = '' // No sourcemap for production
+
+    // Add more configuration for production here like
+    // Uglify plugin
+    // Offline plugin
+    // Etc,
+}
+
+module.exports = config;
