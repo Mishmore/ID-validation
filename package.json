@@ -73,7 +73,7 @@
     },
     "scripts": {
         "test": "jest",
-        "build": "NODE_ENV=production webpack -p --config webpack.config.js",
+        "build": "NODE_ENV=production webpack --config webpack.config.js",
         "dev-server": "webpack-dev-server --inline --hot --port 3040",
         "sass": "sass --watch sass/main.scss:js/main.css --style compressed",
         "start": "node serve.js"
