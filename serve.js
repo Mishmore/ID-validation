@@ -47,13 +47,13 @@ app.get('/api/new-user', function(req, res) {
     res.end()
 })
 
-//
+
 app.use(express.static(path.join(__dirname, 'dist')))
 
 app.get('/', function(request, response) {
-        response.sendFile(__dirname + '/index.html')
-    })
-    //
+    response.sendFile(__dirname + '/index.html')
+})
+
 
 var port = process.env.PORT || 13431
 
