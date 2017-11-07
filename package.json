@@ -74,7 +74,7 @@
     "scripts": {
         "test": "jest",
         "build": "webpack --config webpack.prod.config.js",
-        "dev-server": "webpack-dev-server --inline --hot --port 3040",
+        "dev-server": "webpack-dev-server --inline --hot",
         "sass": "sass --watch sass/main.scss:js/main.css --style compressed",
         "start": "node serve.js"
     },
