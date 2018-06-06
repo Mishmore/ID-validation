@@ -73,10 +73,10 @@
     },
     "scripts": {
         "test": "jest",
-        "build": "webpack --config webpack.prod.config.js",
+        "build": "webpack --config webpack.prod.config.js --progress --profile --colors",
         "dev-server": "webpack-dev-server --inline --hot --port 3040",
         "sass": "sass --watch sass/main.scss:js/main.css --style compressed",
-        "start": "node serve.js"
+        "start": "webpack-dev-server"
     },
     "keywords": [
         "taxi",
