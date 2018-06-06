@@ -12,39 +12,39 @@ export default class Form extends React.Component {
 
         this.login = this.login.bind(this);
 
-        this.state = { 
+        this.state = {
           dniOwner: null,
           registered: initialStatus // initialStatus as a parameter to pass to parent
        }
     }
-    
+
     validateDNI() {
         const dni = document.getElementById('dni').value.toString();
-        const endpoint = `http://localhost:13431/dni/?v=${dni}`;
+        // const endpoint = `http://localhost:13431/dni/?v=${dni}`;
 
-        getJSON(endpoint, (trouble, result) => {
-            if (trouble) {
-                console.error(trouble);
-            } else {
-                this.setState({ "dniOwner": result  }, () => { // Set status is async!
+        // getJSON(endpoint, (trouble, result) => {
+        //     if (trouble) {
+        //         console.error(trouble);
+        //     } else {
+        //         this.setState({ "dniOwner": result  }, () => { // Set status is async!
+        //
+        //             console.table(this.state.dniOwner);
+                    this.login('More');
 
-                    console.table(this.state.dniOwner);
-                    this.login(this.state.dniOwner.apellido_paterno);
-
-                    this.props.onChangeView(Validation.views.VIEW2, true, this.state.dniOwner); //main Callback
-
-                });
-
-                
-            }
-        });
+                    this.props.onChangeView(Validation.views.VIEW2, true, 'More'); //main Callback
+        //
+        //         });
+        //
+        //
+        //     }
+        // });
     }
 
     login(userId) {
         const email = document.getElementById('email').value.toString();
         const username = document.getElementById('username').value.toString();
         const password = document.getElementById('password').value.toString();
-        
+
         const endpoint = `http://localhost:13431/api/new-user/?userid=${userId}&username=${username}&email=${email}`
 
         getJSON(endpoint, (trouble, result) => {
@@ -56,9 +56,9 @@ export default class Form extends React.Component {
 
     render() {
 
-        return ( 
+        return (
             <div className={styles.register}>
-                <Navbar onChangeView={(view, newState, newDni) => this.props.onChangeView(view, newState, newDni)} currentView={this.props.currentView}/>                
+                <Navbar onChangeView={(view, newState, newDni) => this.props.onChangeView(view, newState, newDni)} currentView={this.props.currentView}/>
                 <div className={styles.container}>
                     <form className={styles.form}>
                         <fieldset>
@@ -68,7 +68,7 @@ export default class Form extends React.Component {
                         <fieldset>
                             <label>Username: </label>
                             <input type="text" id="username" />
-                        </fieldset> 
+                        </fieldset>
                         <fieldset>
                             <label>Email: </label>
                             <input type="text" id="email" />
@@ -76,13 +76,13 @@ export default class Form extends React.Component {
                         <fieldset>
                             <label>Password: </label>
                             <input type="password" id="password" />
-                        </fieldset>   
+                        </fieldset>
                         <button type="button" onClick={this.validateDNI.bind(this)} className={styles.signin}>Sign in</button>
                     </form>
                 </div>
             </div>
         );
-        
+
     }
 
 }
