@@ -76,7 +76,7 @@
         "build": "webpack --config webpack.prod.config.js --progress --profile --colors",
         "dev-server": "webpack-dev-server --inline --hot --port 3040",
         "sass": "sass --watch sass/main.scss:js/main.css --style compressed",
-        "start": "yarn build"
+        "start": "node serve.js"
     },
     "keywords": [
         "taxi",
