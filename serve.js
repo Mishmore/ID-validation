@@ -1,13 +1,14 @@
 const express = require('express');
 var request = require('request');
+var path = require('path');
 var cors = require('cors');
 var app = express();
 
 app.use(cors());
 
-app.get('/', function (req, res) { 
-    res.writeHead(500); res.write('Try /dni?v=xxxxxxxx'); res.end(); 
-});
+// app.get('/', function (req, res) {
+//     res.writeHead(500); res.write('Try /dni?v=xxxxxxxx'); res.end();
+// });
 
 app.get('/dni', function (req, res) {
 
@@ -23,12 +24,12 @@ app.get('/dni', function (req, res) {
             "dni": req.query.v
         }
     };
-    
+
     request(options, function (error, response, body) {
         console.log(error || body);
         res.end(JSON.stringify(body));
     });
-    
+
 });
 
 //API
@@ -48,7 +49,16 @@ app.get('/api/new-user', function (req, res) {
 
 var port = process.env.PORT || 13431;
 
-app.listen(port, function () {
-    console.log('App listening on port ' + port);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname + 'index.html'));
 });
 
+app.set('port', (port));
+
+
+app.listen(port, function () {
+  console.log('App listening on port ' + port);
+});
+
+app.use('/', express.static('dist'));

@@ -46,6 +46,7 @@
         "json-loader": "^0.5.4",
         "mocha": "^4.0.1",
         "node-sass": "^4.5.3",
+        "path": "^0.12.7",
         "postcss-cssnext": "^2.9.0",
         "postcss-load-config": "^1.2.0",
         "postcss-loader": "^1.2.1",
@@ -73,10 +74,10 @@
     },
     "scripts": {
         "test": "jest",
-        "build": "cross-env NODE_ENV=production webpack --config webpack.prod.config.js --progress --profile --colors",
+        "build": "webpack --config webpack.prod.config.js --progress --profile --colors",
         "dev-server": "webpack-dev-server --inline --hot --port 3040",
         "sass": "sass --watch sass/main.scss:js/main.css --style compressed",
-        "start": "npm run build"
+        "start": "node serve.js"
     },
     "keywords": [
         "taxi",
