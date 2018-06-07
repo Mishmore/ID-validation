@@ -4,11 +4,11 @@ var path = require('path');
 var cors = require('cors');
 var app = express();
 
-app.use(cors());
+// app.use(cors());
 
-// app.get('/', function (req, res) {
-//     res.writeHead(500); res.write('Try /dni?v=xxxxxxxx'); res.end();
-// });
+app.get('/', function (req, res) {
+    res.writeHead(500); res.write('Try /dni?v=xxxxxxxx'); res.end();
+});
 
 app.get('/dni', function (req, res) {
 
@@ -49,16 +49,22 @@ app.get('/api/new-user', function (req, res) {
 
 var port = process.env.PORT || 13431;
 
-
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname + 'index.html'));
-});
-
+// app.use('/', express.static('dist'));
 app.set('port', (port));
 
 
-app.listen(port, function () {
-  console.log('App listening on port ' + port);
-});
+// app.get('/', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, 'index.html'));
+// });
+//
+// app.listen(port, function () {
+//   console.log('App listening on port ' + port);
+// });
 
-app.use('/', express.static('dist'));
+// app.use('/', express.static('public'));
+
+// app.set('port', (process.env.PORT || 3000));
+
+app.listen(app.get('port'), function() {
+  console.log('Puerto corriendo en ', app.get('port'));
+});
