@@ -18,7 +18,11 @@
         "react-addons-test-utils": "^0.14.8",
         "react-dom": "^15.5.0",
         "react-mapbox-gl": "^2.0.3",
-        "reniec-sunat-js": "^1.0.0"
+        "reniec-sunat-js": "^1.0.0",
+        "webpack": "^2.6.1",
+        "webpack-dev-server": "^2.4.5",
+        "webpack-stream": "^3.2.0",
+        "webworkify-webpack": "^2.0.5"
     },
     "devDependencies": {
         "babel-core": "^6.25.0",
