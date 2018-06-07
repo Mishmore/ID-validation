@@ -44,6 +44,7 @@
         "enzyme-adapter-react-15": "^1.0.1",
         "expect": "^21.2.1",
         "extract-text-webpack-plugin": "^2.1.0",
+        "gh-pages": "^1.2.0",
         "ignore-styles": "*",
         "jest": "^21.2.1",
         "jsdom": "^11.1.0",
@@ -82,7 +83,7 @@
         "dev-server": "webpack-dev-server --inline --hot --port 3040",
         "sass": "sass --watch sass/main.scss:js/main.css --style compressed",
         "start": "webpack-dev-server",
-        "deploy": "yarn build"
+        "deploy": "yarn build && gh-pages -d dist"
     },
     "keywords": [
         "taxi",
